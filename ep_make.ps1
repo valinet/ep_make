@@ -367,7 +367,7 @@ $Host.UI.RawUI.WindowTitle = "ep_make: Building ExplorerPatcher for x86"
 cd repo
 $env:Platform="x86"
 $env:PATH=$EP_OldPath+"$env:AppData\ExplorerPatcher\ep_make\msvc\Windows Kits\10\bin;;$env:AppData\ExplorerPatcher\ep_make\msvc\Windows Kits\10\bin\$EP_WinSDK_Long\x86;;$env:AppData\ExplorerPatcher\ep_make\msvc\VC\Tools\MSVC\$env:VCToolsVersion\bin\HostX64\x86;;$env:AppData\ExplorerPatcher\ep_make\msvc\MSBuild\Current\Bin\amd64;;$env:AppData\ExplorerPatcher\ep_make\msvc\Common7\IDE\;;$env:AppData\ExplorerPatcher\ep_make\msvc\Common7\Tools\;;"
-msbuild ExplorerPatcher.sln /property:Configuration=Release /property:Platform=IA-32
+msbuild ExplorerPatcher.sln /property:Configuration=Release /property:Platform=IA-32 /target:"clean;Build"
 $env:Platform="x64"
 $env:PATH=$EP_NewPath
 cd ..
@@ -376,7 +376,7 @@ Start-Sleep -Seconds 1
 
 $Host.UI.RawUI.WindowTitle = "ep_make: Building ExplorerPatcher for x64"
 cd repo
-msbuild ExplorerPatcher.sln /property:Configuration=Release /property:Platform=amd64
+msbuild ExplorerPatcher.sln /property:Configuration=Release /property:Platform=amd64 /target:"clean;Build"
 cd ..
 $Host.UI.RawUI.WindowTitle += ": ok"
 Start-Sleep -Seconds 1
