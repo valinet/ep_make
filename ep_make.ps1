@@ -226,6 +226,13 @@ if ($dateOfCurrentC -ge $dateOfEpGuiBug -and $dateOfCurrentC -lt $dateOfEpGuiFix
 	curl.exe -L https://github.com/valinet/ExplorerPatcher/commit/5ed503e451fa5b2c7ec7df6fd05c3fa25414b050.patch 2>$null | ..\git\usr\bin\unix2dos.exe | ..\git\usr\bin\patch.exe -N -p1
 	cd ..
 }
+try { $dateOfEpSetupPatchFix=Get-Date(.\git\bin\git.exe -C repo log -1 --format='%ci' c41b93b) }
+catch { $dateOfEpSetupPatchFix=Get-Date }
+if ($dateOfCurrentC -lt $dateOfEpSetupPatchFix) {
+	cd repo
+	curl.exe -L https://github.com/valinet/ExplorerPatcher/commit/c41b93b6b4e8632c5c686ccb0ba4d10612a285eb.patch 2>$null | ..\git\usr\bin\unix2dos.exe | ..\git\usr\bin\patch.exe -N -p1
+	cd ..
+}
 $Host.UI.RawUI.WindowTitle += ": ok"
 Start-Sleep -Seconds 1
 
