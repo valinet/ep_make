@@ -78,7 +78,7 @@ param(
 
     if([DisableConsoleQuickEdit]::SetQuickEdit($DisableQuickEdit))
     {
-        Write-Output "QuickEdit settings has been updated."
+        Write-Output "QuickEdit settings have been updated."
     }
     else
     {
