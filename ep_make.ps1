@@ -294,7 +294,7 @@ $Host.UI.RawUI.WindowTitle = "ep_make: Acquiring ExplorerPatcher"
 .\git\bin\git.exe clone --recursive $url_explorerpatcher repo
 .\git\bin\git.exe -C repo fetch
 .\git\bin\git.exe -C repo reset --hard
-.\git\bin\git.exe -C repo checkout $EP_commitId
+.\git\bin\git.exe -C repo checkout $EP_commitId --recurse-submodules
 $Host.UI.RawUI.WindowTitle += ": ok"
 Start-Sleep -Seconds 1
 
