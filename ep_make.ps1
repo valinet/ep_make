@@ -85,7 +85,6 @@ param(
         Write-Output "Something went wrong."
     }
 }
-Set-QuickEdit -DisableQuickEdit
 
 function Test-RegistryKeyValue
 {
@@ -137,6 +136,7 @@ Write-Host "ep_make - Build environment for ExplorerPatcher"
 Write-Host "==============================================="
 Write-Host "Copyright 2024 VALINET Solutions SRL"
 Write-Host "Author(s): Valentin Radu (valentin.radu@valinet.ro)"
+Set-QuickEdit -DisableQuickEdit
 Write-Host ""
 Write-Host "Using SDK version      : $EP_WinSDK_Long"
 Write-Host "Build directory        : `"$env:AppData\ExplorerPatcher\ep_make`""
