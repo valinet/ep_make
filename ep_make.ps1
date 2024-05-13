@@ -383,7 +383,9 @@ Start-Sleep -Seconds 1
 
 if (Test-Path .\repo\build\Release\ep_setup.exe) {
 	$Host.UI.RawUI.WindowTitle = "ep_make: Finalizing build"
-	New-Item -Path $regKey -Force -ErrorAction SilentlyContinue
+	if (-not (Test-Path $regKey)) {
+		New-Item -Path $regKey -Force -ErrorAction SilentlyContinue
+	}
 	Set-ItemProperty -Path $regKey -Name "UpdateUseLocal" -Value 1 -Type DWORD
 	cd repo
 	cd build
