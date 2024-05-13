@@ -216,9 +216,11 @@ Start-Sleep -Seconds 1
 $Host.UI.RawUI.WindowTitle = "ep_make: Patching ExplorerPatcher"
 .\git\usr\bin\touch.exe repo\ep_weather_host\ep_weather_host_h.h
 (gc .\repo\ep_dwm\ep_dwm\ep_dwm.vcxproj) -replace [regex]::Escape('<PlatformToolset>v142</PlatformToolset>'), '<PlatformToolset>v143</PlatformToolset>' | Out-File .\repo\ep_dwm\ep_dwm\ep_dwm.vcxproj
-$dateOfEpGuiFix=Get-Date(.\git\bin\git.exe -C repo log -1 --format='%ci' 5ed503e)
-$dateOfEpGuiBug=Get-Date(.\git\bin\git.exe -C repo log -1 --format='%ci' 639d7aa)
 $dateOfCurrentC=Get-Date(.\git\bin\git.exe -C repo log -1 --format='%ci' $EP_commitId)
+try { $dateOfEpGuiFix=Get-Date(.\git\bin\git.exe -C repo log -1 --format='%ci' 5ed503e) }
+catch { $dateOfEpGuiFix=Get-Date }
+try { $dateOfEpGuiBug=Get-Date(.\git\bin\git.exe -C repo log -1 --format='%ci' 639d7aa) }
+catch { $dateOfEpGuiBug=Get-Date -Date "01/01/1970" }
 if ($dateOfCurrentC -ge $dateOfEpGuiBug -and $dateOfCurrentC -lt $dateOfEpGuiFix) {
 	cd repo
 	curl.exe -L https://github.com/valinet/ExplorerPatcher/commit/5ed503e451fa5b2c7ec7df6fd05c3fa25414b050.patch 2>$null | ..\git\usr\bin\unix2dos.exe | ..\git\usr\bin\patch.exe -N -p1
